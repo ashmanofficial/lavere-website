@@ -302,32 +302,54 @@ export default function LavereWebsite() {
         </div>
       </section>
 
-      {/* Contact Info */}
-      <section id="contact" className="py-32" style={{ backgroundColor: accentColor }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-light text-center mb-20" style={{ color: darkText, letterSpacing: '-0.02em' }}>Get In Touch</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <a href="tel:+442871837136" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-              <Phone className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Phone</h3>
-              <p className="text-sm opacity-70">+44 (0)78 1837 1360</p>
-            </a>
+{/* Contact Info */}
+<section id="contact" className="py-32" style={{ backgroundColor: accentColor }}>
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-5xl md:text-6xl font-light text-center mb-20" style={{ color: darkText, letterSpacing: '-0.02em' }}>Get In Touch</h2>
+    
+    <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+      <a href="tel:+442871837136" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+        <Phone className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Phone</h3>
+        <p className="text-sm opacity-70">+44 (0)78 1837 1360</p>
+      </a>
 
-            <a href="mailto:contact@lavere.co.uk" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-              <Mail className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Email</h3>
-              <p className="text-sm opacity-70">contact@lavere.co.uk</p>
-            </a>
+      <a href="mailto:contact@lavere.co.uk" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+        <Mail className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Email</h3>
+        <p className="text-sm opacity-70">contact@lavere.co.uk</p>
+      </a>
 
-            <div className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-              <MapPin className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Location</h3>
-              <p className="text-sm opacity-70">London, UK</p>
-            </div>
-          </div>
+      <div className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+        <MapPin className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Location</h3>
+        <p className="text-sm opacity-70">London, UK</p>
+      </div>
+    </div>
+
+    <div className="flex justify-center">
+      <div className="group p-8 rounded-lg transition border text-center max-w-sm" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+        <h3 className="font-light text-lg mb-6" style={{ color: darkText, letterSpacing: '-0.01em' }}>Follow Us</h3>
+        <div className="flex gap-8 justify-center">
+          <a href="https://instagram.com/LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+              <circle cx="17.5" cy="6.5" r="1.5"></circle>
+            </svg>
+            <p className="text-xs mt-3" style={{ color: brandColor }}>@LavereUK</p>
+          </a>
+          <a href="https://tiktok.com/@LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+            </svg>
+            <p className="text-xs mt-3" style={{ color: brandColor }}>@LavereUK</p>
+          </a>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="py-12 border-t" style={{ backgroundColor: bgColor, borderColor: `${brandColor}20` }}>

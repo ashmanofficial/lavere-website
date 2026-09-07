@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Menu, X, ArrowRight, Phone, Mail, MapPin, Sofa, Bath, Palette, Wrench, Grid, RefreshCw, Hammer, Layers } from 'lucide-react';
 
 export default function LavereWebsite() {
-  const brandColor = '#6D6A7D'; // Original purple-gray
-  const bgColor = '#F0F0E8'; // Original cream/beige
+  const brandColor = '#6D6A7D'; // Muted purple-gray
+  const bgColor = '#F0F0E8'; // Warm cream/beige
   const accentColor = '#FAFAF8'; // Light accent
-  const darkText = '#1a1a1a'; // Dark text
+  const darkText = '#6D6A7D'; // Brand color for all text
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedService, setExpandedService] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,14 +17,46 @@ export default function LavereWebsite() {
   });
 
   const services = [
-    { name: 'Property Renovations', icon: Hammer },
-    { name: 'Painting & Decorating', icon: Palette },
-    { name: 'Flooring', icon: Layers },
-    { name: 'Kitchen & Bathroom', icon: Bath },
-    { name: 'Repairs & Maintenance', icon: Wrench },
-    { name: 'Tiling', icon: Grid },
-    { name: 'Fixtures & Fittings', icon: Sofa },
-    { name: 'General Carpentry', icon: RefreshCw }
+    { 
+      name: 'Property Renovations', 
+      icon: Hammer,
+      description: 'Complete room transformations, property upgrades and multi-trade renovation works tailored to your space.'
+    },
+    { 
+      name: 'Painting & Decorating', 
+      icon: Palette,
+      description: 'Interior painting, feature walls, wallpapering and detailed finishing work.'
+    },
+    { 
+      name: 'Flooring', 
+      icon: Layers,
+      description: 'Professional installation of laminate, LVT, vinyl and other flooring solutions.'
+    },
+    { 
+      name: 'Kitchen & Bathroom', 
+      icon: Bath,
+      description: 'Repairs, upgrades, resealing, fittings, fixtures and cosmetic improvements.'
+    },
+    { 
+      name: 'Repairs & Maintenance', 
+      icon: Wrench,
+      description: 'From small jobs to larger property maintenance requirements—we handle it all.'
+    },
+    { 
+      name: 'Tiling', 
+      icon: Grid,
+      description: 'Professional tiling work for kitchens, bathrooms and feature walls.'
+    },
+    { 
+      name: 'Fixtures & Fittings', 
+      icon: Sofa,
+      description: 'TV mounting, mirrors, shelving, curtain rails, blinds and all fixtures installed correctly.'
+    },
+    { 
+      name: 'General Carpentry', 
+      icon: RefreshCw,
+      description: 'Wall panelling, shelving, doors, frames, boxing-in and bespoke timber projects.'
+    }
   ];
 
   const handleFormChange = (e) => {
@@ -112,11 +145,24 @@ export default function LavereWebsite() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map(({ name, icon: Icon }, idx) => (
-              <div key={idx} className="group p-8 rounded-lg transition duration-300 cursor-pointer border hover:border-opacity-100 relative overflow-hidden" style={{ backgroundColor: 'white', borderColor: brandColor, borderWidth: '1px', borderOpacity: '0.3' }}>
+            {services.map(({ name, icon: Icon, description }, idx) => (
+              <div 
+                key={idx} 
+                onClick={() => setExpandedService(expandedService === idx ? null : idx)}
+                className="group p-8 rounded-lg transition duration-300 cursor-pointer border hover:border-opacity-100 relative overflow-hidden" 
+                style={{ backgroundColor: 'white', borderColor: brandColor, borderWidth: '1px', borderOpacity: '0.3' }}
+              >
                 <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition" style={{ background: `linear-gradient(135deg, ${brandColor}, transparent)` }}></div>
                 <Icon size={40} className="mb-6 relative z-10 transition group-hover:scale-110" style={{ color: brandColor }} />
-                <h3 className="text-lg font-light relative z-10 group-hover:opacity-80 transition" style={{ color: darkText, letterSpacing: '-0.01em' }}>{name}</h3>
+                <h3 className="text-lg font-light relative z-10 group-hover:opacity-80 transition" style={{ color: brandColor, letterSpacing: '-0.01em' }}>{name}</h3>
+                
+                {expandedService === idx && (
+                  <div className="mt-4 pt-4 border-t relative z-10" style={{ borderColor: `${brandColor}40` }}>
+                    <p className="text-sm leading-relaxed" style={{ color: brandColor, opacity: 0.8 }}>
+                      {description}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -294,4 +340,4 @@ export default function LavereWebsite() {
       </footer>
     </div>
   );
-} 
+}

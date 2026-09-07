@@ -1,442 +1,297 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Phone, Mail, MapPin, Sofa, Bath, Palette, Wrench, Grid, RefreshCw, Hammer, Layers } from 'lucide-react';
 
 export default function LavereWebsite() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const brandColor = '#6D6A7D'; // Original purple-gray
+  const bgColor = '#F0F0E8'; // Original cream/beige
+  const accentColor = '#FAFAF8'; // Light accent
+  const darkText = '#1a1a1a'; // Dark text
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    budget: '',
     service: '',
     message: ''
   });
 
-  const testimonials = [
-    {
-      quote: "Lavere has been a game-changer for my home. Their versatility and expertise have been invaluable.",
-      author: "Olivia Martinez",
-      role: "Homeowner",
-    },
-    {
-      quote: "Reliable and efficient! The staff was incredibly polite and went above and beyond to ensure satisfaction.",
-      author: "Michael Chen",
-      role: "Property Manager",
-    },
-    {
-      quote: "Exceptional customer service! They handled our urgent renovation with professionalism and care.",
-      author: "Sophia Turner",
-      role: "Homeowner",
-    },
-  ];
-
   const services = [
-    "Consulting",
-    "Tiling",
-    "Flooring",
-    "Painting & Decoration",
-    "Cleaning",
-    "Renovating",
-    "Plumbing",
-    "Repairing",
-    "Restoring",
-    "Interior Design"
+    { name: 'Property Renovations', icon: Hammer },
+    { name: 'Painting & Decorating', icon: Palette },
+    { name: 'Flooring', icon: Layers },
+    { name: 'Kitchen & Bathroom', icon: Bath },
+    { name: 'Repairs & Maintenance', icon: Wrench },
+    { name: 'Tiling', icon: Grid },
+    { name: 'Fixtures & Fittings', icon: Sofa },
+    { name: 'General Carpentry', icon: RefreshCw }
   ];
-
-  const projects = [
-    {
-      title: "Modern Kitchen Transformation",
-      service: "Interior Design",
-      description: "Complete kitchen redesign with bespoke cabinetry and premium finishes"
-    },
-    {
-      title: "Luxury Bathroom Suite",
-      service: "Tiling & Plumbing",
-      description: "High-end bathroom renovation with marble and contemporary fixtures"
-    },
-    {
-      title: "Open Plan Living",
-      service: "Renovation",
-      description: "Structural redesign creating seamless entertaining spaces"
-    },
-    {
-      title: "Heritage Property Restoration",
-      service: "Restoring",
-      description: "Careful restoration preserving period features with modern comfort"
-    },
-    {
-      title: "Bedroom Suite Design",
-      service: "Interior Design",
-      description: "Bespoke bedroom and ensuite with integrated storage solutions"
-    },
-    {
-      title: "Commercial Office Fit-out",
-      service: "Renovation",
-      description: "Complete office transformation with contemporary design"
-    }
-  ];
-
-  const processSteps = [
-    {
-      number: "1",
-      title: "Consultation",
-      description: "We meet to understand your vision, requirements, and budget for the project."
-    },
-    {
-      number: "2",
-      title: "Design & Quote",
-      description: "Professional design proposal and detailed quote tailored to your needs."
-    },
-    {
-      number: "3",
-      title: "Execution",
-      description: "Our expert team delivers flawless craftsmanship from start to finish."
-    }
-  ];
-
-  const handleTestimonialChange = (direction) => {
-    if (direction === 'next') {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    } else {
-      setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    }
-  };
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for reaching out! We will be in touch shortly.');
-    setFormData({ name: '', email: '', phone: '', budget: '', service: '', message: '' });
+    
+    fetch('https://formsubmit.co/ashley.thompson@lavere.co.uk', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+        _subject: `New Enquiry from ${formData.name}`
+      })
+    }).then(response => {
+      alert('Thank you for your enquiry! We will be in touch shortly.');
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    }).catch(error => {
+      alert('There was an error sending your enquiry. Please try again.');
+    });
   };
 
   return (
-    <div className="w-full bg-white text-gray-900">
+    <div className="w-full" style={{ backgroundColor: bgColor, color: darkText }}>
       {/* Navigation */}
-      <nav className="sticky top-0 bg-white border-b border-gray-200 z-50">
+      <nav className="fixed w-full top-0 z-50 backdrop-blur-sm border-b" style={{ backgroundColor: `rgba(240, 240, 232, 0.98)`, borderColor: 'rgba(109, 106, 125, 0.2)' }}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div className="text-2xl font-bold tracking-tight">LAVERE</div>
-          <div className="hidden md:flex gap-12">
-            <a href="#projects" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition">Work</a>
-            <a href="#process" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition">Process</a>
-            <a href="#contact" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition">Contact</a>
+          <div className="text-2xl font-light tracking-[0.3em]" style={{ color: brandColor }}>LAVERE</div>
+          
+          <div className="hidden md:flex gap-12 text-xs tracking-widest opacity-70 hover:opacity-100 transition">
+            <a href="#services" className="hover:text-gray-900 transition">SERVICES</a>
+            <a href="#enquiry" className="hover:text-gray-900 transition">ENQUIRY</a>
+            <a href="#contact" className="hover:text-gray-900 transition">CONTACT</a>
           </div>
+
+          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t" style={{ backgroundColor: accentColor, borderColor: `rgba(109, 106, 125, 0.2)` }}>
+            <a href="#services" className="block px-6 py-4 text-sm tracking-widest opacity-70 hover:opacity-100">SERVICES</a>
+            <a href="#enquiry" className="block px-6 py-4 text-sm tracking-widest opacity-70 hover:opacity-100">ENQUIRY</a>
+            <a href="#contact" className="block px-6 py-4 text-sm tracking-widest opacity-70 hover:opacity-100">CONTACT</a>
+          </div>
+        )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="bg-white py-32 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-sm font-semibold tracking-widest uppercase mb-6" style={{ color: '#d4a574' }}>Luxury Renovations</p>
-              <h1 className="text-6xl font-bold leading-tight mb-8 tracking-tight">
-                Transforming spaces with exceptional craftsmanship.
-              </h1>
-              <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                We bring your vision to life with meticulous attention to detail, premium finishes, and a commitment to excellence.
-              </p>
-              <button className="bg-gray-900 text-white px-10 py-4 font-semibold hover:bg-gray-800 transition flex items-center gap-2 text-lg">
-                Start Your Project <ArrowRight size={20} />
-              </button>
-            </div>
-            <div className="bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl p-12 h-96 flex items-center justify-center border border-gray-200">
-              <div className="text-gray-400 text-center">
-                <p className="text-lg">Your featured project image here</p>
-              </div>
-            </div>
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-32 pb-24 md:py-40" style={{ backgroundColor: bgColor }}>
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, ${brandColor} 1px, transparent 1px)`, backgroundSize: '80px 80px' }}></div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-block mb-8 px-6 py-2 rounded-full border text-xs tracking-widest font-light" style={{ borderColor: brandColor, color: brandColor }}>PROPERTY RENOVATION & MAINTENANCE</div>
+            
+            <h1 className="text-6xl md:text-7xl font-light mb-8 leading-tight" style={{ color: darkText, letterSpacing: '-0.02em' }}>
+              Your Property. Our Priority.
+            </h1>
+            
+            <p className="text-lg md:text-xl mb-12 opacity-70 leading-relaxed">
+              Reliable, high-quality renovation, maintenance and home improvement services tailored to your home. From complete transformations to everyday repairs—we deliver quality workmanship with meticulous attention to detail.
+            </p>
+
+            <a href="#enquiry" className="inline-block px-10 py-4 border-2 rounded-lg transition duration-300 text-sm tracking-widest font-light hover:shadow-lg" style={{ borderColor: brandColor, color: brandColor, backgroundColor: 'transparent' }} onMouseEnter={(e) => { e.target.style.backgroundColor = brandColor; e.target.style.color = bgColor; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = brandColor; }}>
+              REQUEST A QUOTE
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section id="projects" className="py-32 bg-white">
+      {/* Services Grid */}
+      <section id="services" className="py-32" style={{ backgroundColor: bgColor }}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-20">
-            <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#d4a574' }}>Our Work</p>
-            <h2 className="text-5xl font-bold mb-6">Recent Projects</h2>
-            <p className="text-xl text-gray-600 max-w-2xl">Showcasing our most refined renovations and transformations across London.</p>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>What We Do</h2>
+            <p className="text-lg opacity-70 max-w-2xl mx-auto">From complete renovations to everyday repairs and installations—one service for everything</p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {projects.map((project, idx) => (
-              <div key={idx} className="group cursor-pointer">
-                <div className="bg-gradient-to-br from-gray-100 to-gray-50 rounded-xl h-80 mb-6 border border-gray-200 flex items-center justify-center overflow-hidden hover:border-gray-300 transition">
-                  <div className="text-gray-400 text-center group-hover:scale-105 transition duration-300">
-                    <p className="text-lg">{project.title}</p>
-                  </div>
-                </div>
-                <p className="text-sm font-semibold tracking-wide uppercase mb-3" style={{ color: '#d4a574' }}>{project.service}</p>
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-gray-600 transition">{project.title}</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">{project.description}</p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map(({ name, icon: Icon }, idx) => (
+              <div key={idx} className="group p-8 rounded-lg transition duration-300 cursor-pointer border hover:border-opacity-100 relative overflow-hidden" style={{ backgroundColor: 'white', borderColor: brandColor, borderWidth: '1px', borderOpacity: '0.3' }}>
+                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition" style={{ background: `linear-gradient(135deg, ${brandColor}, transparent)` }}></div>
+                <Icon size={40} className="mb-6 relative z-10 transition group-hover:scale-110" style={{ color: brandColor }} />
+                <h3 className="text-lg font-light relative z-10 group-hover:opacity-80 transition" style={{ color: darkText, letterSpacing: '-0.01em' }}>{name}</h3>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Lavere */}
-      <section className="py-32 bg-gray-50 border-y border-gray-200">
+      {/* Why Choose Lavere Section */}
+      <section className="py-32" style={{ backgroundColor: bgColor }}>
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#d4a574' }}>Why Lavere</p>
-          <h2 className="text-5xl font-bold mb-20">Why Homeowners Choose Us</h2>
-          
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <div className="mb-8">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#f5f1e8' }}>
-                  <span className="text-2xl font-bold" style={{ color: '#d4a574' }}>01</span>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Expert Craftsmanship</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">Decades of combined experience delivering luxury finishes and premium quality workmanship on every project.</p>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>Why Choose Lavere?</h2>
+            <p className="text-lg opacity-70 max-w-2xl mx-auto">We approach every project with the same focus: quality workmanship, careful execution and a finish built to last</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Experienced</h3>
+              <p className="opacity-70 text-lg leading-relaxed">Over 7 years of hands-on property renovation and maintenance experience across London homes.</p>
             </div>
-            <div>
-              <div className="mb-8">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#f5f1e8' }}>
-                  <span className="text-2xl font-bold" style={{ color: '#d4a574' }}>02</span>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Seamless Process</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">From initial consultation to project completion, we manage every detail for a stress-free experience.</p>
+            <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Versatile</h3>
+              <p className="opacity-70 text-lg leading-relaxed">One service for everything from small repairs to larger renovation projects—no job too small or too big.</p>
             </div>
-            <div>
-              <div className="mb-8">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#f5f1e8' }}>
-                  <span className="text-2xl font-bold" style={{ color: '#d4a574' }}>03</span>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Premium Results</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">Handpicked materials, attention to detail, and flawless execution on every renovation.</p>
+            <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Detail Focused</h3>
+              <p className="opacity-70 text-lg leading-relaxed">Measurements, preparation and finishing are treated with the attention they deserve.</p>
+            </div>
+            <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Reliable</h3>
+              <p className="opacity-70 text-lg leading-relaxed">Clear communication, punctual attendance and respect for your property at every step.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* The Process */}
-      <section id="process" className="py-32 bg-white">
+      {/* Stats Section */}
+      <section className="py-32" style={{ backgroundColor: accentColor }}>
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#d4a574' }}>How We Work</p>
-          <h2 className="text-5xl font-bold mb-20">Our Process</h2>
-          
           <div className="grid md:grid-cols-3 gap-16">
-            {processSteps.map((step, idx) => (
-              <div key={idx} className="relative">
-                <div className="flex items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-gray-900 text-white font-bold text-2xl">
-                      {step.number}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-                    <p className="text-gray-600 text-lg leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-                {idx < processSteps.length - 1 && (
-                  <div className="absolute top-20 -right-8 hidden md:block">
-                    <ArrowRight className="text-gray-300" size={32} />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-32 bg-gray-50 border-y border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-semibold tracking-widest uppercase mb-4 text-center" style={{ color: '#d4a574' }}>Client Reviews</p>
-          <h2 className="text-4xl font-bold mb-20 text-center">Trusted by Homeowners</h2>
-          
-          <div className="bg-white p-12 rounded-2xl border border-gray-200">
-            <div className="mb-8">
-              <div className="text-amber-500 text-4xl mb-6">★★★★★</div>
-              <p className="text-2xl text-gray-900 mb-8 leading-relaxed">"{testimonials[currentTestimonial].quote}"</p>
+            <div className="text-center md:text-left">
+              <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>250+</div>
+              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Satisfied Clients</h3>
+              <p className="text-sm opacity-60">Trusted by London homeowners for quality work</p>
             </div>
-            <div>
-              <p className="text-lg font-bold text-gray-900">{testimonials[currentTestimonial].author}</p>
-              <p className="text-gray-600">{testimonials[currentTestimonial].role}</p>
+            <div className="text-center md:text-left">
+              <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>7+</div>
+              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Years Crafting Excellence</h3>
+              <p className="text-sm opacity-60">Proven experience across all project types</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>100%</div>
+              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Built to Last</h3>
+              <p className="text-sm opacity-60">Quality finishes that stand the test of time</p>
             </div>
           </div>
-
-          <div className="flex justify-center gap-4 mt-8">
-            <button
-              onClick={() => handleTestimonialChange('prev')}
-              className="p-3 rounded-full border border-gray-300 hover:bg-white transition"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={() => handleTestimonialChange('next')}
-              className="p-3 rounded-full border border-gray-300 hover:bg-white transition"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#d4a574' }}>Services</p>
-          <h2 className="text-4xl font-bold mb-16">What We Offer</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {services.map((service, idx) => (
-              <div key={idx} className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center hover:border-gray-300 transition">
-                <p className="font-semibold text-gray-900">{service}</p>
-              </div>
-            ))}
+      {/* Enquiry Form */}
+      <section id="enquiry" className="py-32" style={{ backgroundColor: bgColor }}>
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>Have a Project in Mind?</h2>
+            <p className="text-lg opacity-70">Tell us what you want to achieve and we'll help determine the best way to bring it to life</p>
           </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-32 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#d4a574' }}>Let us Talk</p>
-          <h2 className="text-5xl font-bold mb-8">Ready to Transform Your Space?</h2>
-          <p className="text-xl text-gray-400 mb-16 max-w-2xl">Tell us about your project, and we will provide a consultation and personalized quote.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold mb-3">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleFormChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-3">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleFormChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
-                  placeholder="your@email.com"
-                />
-              </div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleFormChange}
+                required
+                className="px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-0 transition" 
+                style={{ backgroundColor: 'white', borderColor: `${brandColor}40`, color: darkText, outlineColor: brandColor }}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleFormChange}
+                required
+                className="px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 transition"
+                style={{ backgroundColor: 'white', borderColor: `${brandColor}40`, color: darkText, outlineColor: brandColor }}
+              />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold mb-3">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
-                  placeholder="+44 (0) 123 456 7890"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-3">Budget</label>
-                <input
-                  type="text"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
-                  placeholder="£5,000 - £50,000+"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-3">Service</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleFormChange}
+                className="px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 transition"
+                style={{ backgroundColor: 'white', borderColor: `${brandColor}40`, color: darkText, outlineColor: brandColor }}
+              />
               <select
                 name="service"
                 value={formData.service}
                 onChange={handleFormChange}
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
+                required
+                className="px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 transition"
+                style={{ backgroundColor: 'white', borderColor: `${brandColor}40`, color: darkText, outlineColor: brandColor }}
               >
-                <option value="">Select a service</option>
-                {services.map((service, idx) => (
-                  <option key={idx} value={service}>{service}</option>
+                <option value="" style={{ backgroundColor: 'white', color: darkText }}>Select a Service</option>
+                {services.map(({ name }, idx) => (
+                  <option key={idx} value={name} style={{ backgroundColor: 'white', color: darkText }}>{name}</option>
                 ))}
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold mb-3">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleFormChange}
-                required
-                rows="5"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-500"
-                placeholder="Tell us about your vision..."
-              />
-            </div>
+            <textarea
+              name="message"
+              placeholder="Tell us about your project..."
+              value={formData.message}
+              onChange={handleFormChange}
+              required
+              rows="5"
+              className="w-full px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 transition resize-none"
+              style={{ backgroundColor: 'white', borderColor: `${brandColor}40`, color: darkText, outlineColor: brandColor }}
+            ></textarea>
 
             <button
               type="submit"
-              className="w-full text-lg font-semibold py-4 rounded-lg transition"
-              style={{ backgroundColor: '#d4a574', color: '#1a1a1a' }}
+              className="w-full py-4 text-sm tracking-widest font-light rounded-lg transition duration-300 border-2"
+              style={{ borderColor: brandColor, color: brandColor, backgroundColor: 'transparent' }}
+              onMouseEnter={(e) => { e.target.style.backgroundColor = brandColor; e.target.style.color = bgColor; }}
+              onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = brandColor; }}
             >
-              Schedule Consultation
+              SEND ENQUIRY
             </button>
           </form>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-gray-400 py-12 border-t border-gray-800">
+      {/* Contact Info */}
+      <section id="contact" className="py-32" style={{ backgroundColor: accentColor }}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">LAVERE</h3>
-              <p className="text-sm leading-relaxed">Premium home renovation and design services across London.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-white mb-4">Navigation</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a href="#projects" className="hover:text-white transition">Our Work</a></li>
-                <li><a href="#process" className="hover:text-white transition">Process</a></li>
-                <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-white mb-4">Services</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a href="#contact" className="hover:text-white transition">Interior Design</a></li>
-                <li><a href="#contact" className="hover:text-white transition">Renovations</a></li>
-                <li><a href="#contact" className="hover:text-white transition">Consulting</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-white mb-4">Contact</h4>
-              <ul className="space-y-3 text-sm">
-                <li className="flex gap-2"><Mail size={16} /> hello@lavere.co.uk</li>
-                <li className="flex gap-2"><Phone size={16} /> +44 (0) 123 456 7890</li>
-                <li className="flex gap-2"><MapPin size={16} /> London, UK</li>
-              </ul>
+          <h2 className="text-5xl md:text-6xl font-light text-center mb-20" style={{ color: darkText, letterSpacing: '-0.02em' }}>Get In Touch</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <a href="tel:+442871837136" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <Phone className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Phone</h3>
+              <p className="text-sm opacity-70">+44 (0)78 1837 1360</p>
+            </a>
+
+            <a href="mailto:contact@lavere.co.uk" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <Mail className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Email</h3>
+              <p className="text-sm opacity-70">contact@lavere.co.uk</p>
+            </a>
+
+            <div className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <MapPin className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Location</h3>
+              <p className="text-sm opacity-70">London, UK</p>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-sm">
-            <p>&copy; 2024 Lavere. All rights reserved. Premium renovations for discerning homeowners.</p>
-          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t" style={{ backgroundColor: bgColor, borderColor: `${brandColor}20` }}>
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="mb-3 text-sm tracking-widest">
+            <span className="font-light" style={{ color: brandColor }}>LAVERE</span> — PROPERTY RENOVATION • MAINTENANCE • HOME IMPROVEMENTS
+          </p>
+          <p className="text-xs opacity-50 tracking-wide" style={{ color: darkText }}>© 2026 Lavere. All rights reserved.</p>
         </div>
       </footer>
     </div>
   );
-}
+} 

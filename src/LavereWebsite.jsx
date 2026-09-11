@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Menu, X, ArrowRight, Phone, Mail, MapPin, Sofa, Bath, Palette, Wrench, Grid, RefreshCw, Hammer, Layers } from 'lucide-react';
 
 export default function LavereWebsite() {
-  const brandColor = '#6D6A7D'; // Muted purple-gray
-  const bgColor = '#F0F0E8'; // Warm cream/beige
-  const accentColor = '#FAFAF8'; // Light accent
-  const darkText = '#6D6A7D'; // Brand color for all text
+  const brandColor = '#6D6A7D';
+  const bgColor = '#F0F0E8';
+  const accentColor = '#FAFAF8';
+  const darkText = '#6D6A7D';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState(null);
   const [formData, setFormData] = useState({
@@ -91,7 +91,7 @@ export default function LavereWebsite() {
       {/* Navigation */}
       <nav className="fixed w-full top-0 z-50 backdrop-blur-sm border-b" style={{ backgroundColor: `rgba(240, 240, 232, 0.98)`, borderColor: 'rgba(109, 106, 125, 0.2)' }}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div className="text-2xl font-light tracking-[0.3em]" style={{ color: brandColor }}>LAVERE</div>
+          <div className="text-2xl font-light tracking-[0.3em]" style={{ color: brandColor, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>LAVERE</div>
           
           <div className="hidden md:flex gap-12 text-xs tracking-widest opacity-70 hover:opacity-100 transition">
             <a href="#services" className="hover:text-gray-900 transition">SERVICES</a>
@@ -137,11 +137,11 @@ export default function LavereWebsite() {
       </section>
 
       {/* Services Grid */}
-      <section id="services" className="py-32" style={{ backgroundColor: bgColor }}>
+      <section id="services" className="py-32" style={{ backgroundColor: accentColor }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>What We Do</h2>
-            <p className="text-lg opacity-70 max-w-2xl mx-auto">From complete renovations to everyday repairs and installations—one service for everything</p>
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: brandColor, letterSpacing: '-0.02em' }}>What We Do</h2>
+            <p className="text-lg opacity-70 max-w-2xl mx-auto" style={{ color: brandColor }}>From complete renovations to everyday repairs and installations—one service for everything</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -169,64 +169,104 @@ export default function LavereWebsite() {
         </div>
       </section>
 
-      {/* Why Choose Lavere Section */}
+      {/* How It Works Section */}
       <section className="py-32" style={{ backgroundColor: bgColor }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>Why Choose Lavere?</h2>
-            <p className="text-lg opacity-70 max-w-2xl mx-auto">We approach every project with the same focus: quality workmanship, careful execution and a finish built to last</p>
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: brandColor, letterSpacing: '-0.02em' }}>How It Works</h2>
+            <p className="text-lg opacity-70 max-w-2xl mx-auto" style={{ color: brandColor }}>Four simple steps from idea to completion</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto">
+            <div className="text-center">
+              <div className="text-6xl font-light mb-6" style={{ color: brandColor, opacity: 0.3, letterSpacing: '-0.02em' }}>1</div>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Consultation</h3>
+              <p className="text-sm leading-relaxed opacity-70" style={{ color: brandColor }}>Book a site visit. We assess your project, discuss your goals and budget, and send a detailed quote within 48 hours.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-6xl font-light mb-6" style={{ color: brandColor, opacity: 0.3, letterSpacing: '-0.02em' }}>2</div>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Planning</h3>
+              <p className="text-sm leading-relaxed opacity-70" style={{ color: brandColor }}>Confirm design, materials, timeline, and project scope. Everything mapped out before work begins.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-6xl font-light mb-6" style={{ color: brandColor, opacity: 0.3, letterSpacing: '-0.02em' }}>3</div>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Preparation</h3>
+              <p className="text-sm leading-relaxed opacity-70" style={{ color: brandColor }}>We confirm all details, establish a schedule, and brief you on what to expect. Clear communication throughout.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-6xl font-light mb-6" style={{ color: brandColor, opacity: 0.3, letterSpacing: '-0.02em' }}>4</div>
+              <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Execution</h3>
+              <p className="text-sm leading-relaxed opacity-70" style={{ color: brandColor }}>Work begins. We manage every detail, keep the site clean, and deliver a finished project built to last.</p>
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <p className="text-lg font-light" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Simple. Clear. Done right.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Lavere Section */}
+      <section className="py-32" style={{ backgroundColor: accentColor, color: darkText }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: brandColor, letterSpacing: '-0.02em' }}>Why Choose Lavere?</h2>
+            <p className="text-lg opacity-70 max-w-2xl mx-auto" style={{ color: brandColor }}>We approach every project with the same focus: quality workmanship, careful execution and a finish built to last</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
               <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Experienced</h3>
-              <p className="opacity-70 text-lg leading-relaxed">Over 7 years of hands-on property renovation and maintenance experience across London homes.</p>
+              <p className="opacity-70 text-lg leading-relaxed" style={{ color: brandColor }}>Over 7 years of hands-on property renovation and maintenance experience across London homes.</p>
             </div>
             <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
               <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Versatile</h3>
-              <p className="opacity-70 text-lg leading-relaxed">One service for everything from small repairs to larger renovation projects—no job too small or too big.</p>
+              <p className="opacity-70 text-lg leading-relaxed" style={{ color: brandColor }}>One service for everything from small repairs to larger renovation projects—no job too small or too big.</p>
             </div>
             <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
               <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Detail Focused</h3>
-              <p className="opacity-70 text-lg leading-relaxed">Measurements, preparation and finishing are treated with the attention they deserve.</p>
+              <p className="opacity-70 text-lg leading-relaxed" style={{ color: brandColor }}>Measurements, preparation and finishing are treated with the attention they deserve.</p>
             </div>
             <div className="border-l-2 pl-8" style={{ borderColor: brandColor }}>
               <h3 className="text-xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Reliable</h3>
-              <p className="opacity-70 text-lg leading-relaxed">Clear communication, punctual attendance and respect for your property at every step.</p>
+              <p className="opacity-70 text-lg leading-relaxed" style={{ color: brandColor }}>Clear communication, punctual attendance and respect for your property at every step.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-32" style={{ backgroundColor: accentColor }}>
+      <section className="py-32" style={{ backgroundColor: bgColor, color: darkText }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-16">
             <div className="text-center md:text-left">
               <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>250+</div>
-              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Satisfied Clients</h3>
-              <p className="text-sm opacity-60">Trusted by London homeowners for quality work</p>
+              <h3 className="text-lg font-light mb-2" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Satisfied Clients</h3>
+              <p className="text-sm opacity-60" style={{ color: brandColor }}>Trusted by London homeowners for quality work</p>
             </div>
             <div className="text-center md:text-left">
               <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>7+</div>
-              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Years Crafting Excellence</h3>
-              <p className="text-sm opacity-60">Proven experience across all project types</p>
+              <h3 className="text-lg font-light mb-2" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Years Crafting Excellence</h3>
+              <p className="text-sm opacity-60" style={{ color: brandColor }}>Proven experience across all project types</p>
             </div>
             <div className="text-center md:text-left">
               <div className="text-6xl font-light mb-4" style={{ color: brandColor, letterSpacing: '-0.02em' }}>100%</div>
-              <h3 className="text-lg font-light mb-2" style={{ color: darkText, letterSpacing: '-0.01em' }}>Built to Last</h3>
-              <p className="text-sm opacity-60">Quality finishes that stand the test of time</p>
+              <h3 className="text-lg font-light mb-2" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Built to Last</h3>
+              <p className="text-sm opacity-60" style={{ color: brandColor }}>Quality finishes that stand the test of time</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Enquiry Form */}
-      <section id="enquiry" className="py-32" style={{ backgroundColor: bgColor }}>
+      <section id="enquiry" className="py-32" style={{ backgroundColor: accentColor, color: darkText }}>
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: darkText, letterSpacing: '-0.02em' }}>Have a Project in Mind?</h2>
-            <p className="text-lg opacity-70">Tell us what you want to achieve and we'll help determine the best way to bring it to life</p>
+            <h2 className="text-5xl md:text-6xl font-light mb-6" style={{ color: brandColor, letterSpacing: '-0.02em' }}>Have a Project in Mind?</h2>
+            <p className="text-lg opacity-70" style={{ color: brandColor }}>Tell us what you want to achieve and we'll help determine the best way to bring it to life</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -302,57 +342,57 @@ export default function LavereWebsite() {
         </div>
       </section>
 
-{/* Contact Info */}
-<section id="contact" className="py-32" style={{ backgroundColor: accentColor }}>
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-5xl md:text-6xl font-light text-center mb-20" style={{ color: darkText, letterSpacing: '-0.02em' }}>Get In Touch</h2>
-    
-    <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
-      <a href="tel:+442871837136" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-        <Phone className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Phone</h3>
-        <p className="text-sm opacity-70">+44 (0)78 1837 1360</p>
-      </a>
+      {/* Contact Info */}
+      <section id="contact" className="py-32" style={{ backgroundColor: bgColor, color: darkText }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl md:text-6xl font-light text-center mb-20" style={{ color: brandColor, letterSpacing: '-0.02em' }}>Get In Touch</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+            <a href="tel:+442871837136" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <Phone className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Phone</h3>
+              <p className="text-sm opacity-70" style={{ color: brandColor }}>+44 (0)78 1837 1360</p>
+            </a>
 
-      <a href="mailto:contact@lavere.co.uk" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-        <Mail className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Email</h3>
-        <p className="text-sm opacity-70">contact@lavere.co.uk</p>
-      </a>
+            <a href="mailto:contact@lavere.co.uk" className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <Mail className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Email</h3>
+              <p className="text-sm opacity-70" style={{ color: brandColor }}>contact@lavere.co.uk</p>
+            </a>
 
-      <div className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-        <MapPin className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
-        <h3 className="font-light text-lg mb-3" style={{ color: darkText, letterSpacing: '-0.01em' }}>Location</h3>
-        <p className="text-sm opacity-70">London, UK</p>
-      </div>
-    </div>
+            <div className="group p-8 rounded-lg transition border text-center" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <MapPin className="mx-auto mb-6 group-hover:scale-110 transition" size={32} style={{ color: brandColor }} />
+              <h3 className="font-light text-lg mb-3" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Location</h3>
+              <p className="text-sm opacity-70" style={{ color: brandColor }}>London, UK</p>
+            </div>
+          </div>
 
-    <div className="flex justify-center">
-      <div className="group p-8 rounded-lg transition border text-center max-w-sm" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
-        <h3 className="font-light text-lg mb-6" style={{ color: darkText, letterSpacing: '-0.01em' }}>Follow Us</h3>
-        <div className="flex gap-8 justify-center">
-          <a href="https://instagram.com/LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
-              <circle cx="17.5" cy="6.5" r="1.5"></circle>
-            </svg>
-            <p className="text-xs mt-3" style={{ color: brandColor }}>@LavereUK</p>
-          </a>
-          <a href="https://tiktok.com/@LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
-              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-            </svg>
-            <p className="text-xs mt-3" style={{ color: brandColor }}>@LavereUK</p>
-          </a>
+          <div className="flex justify-center">
+            <div className="group p-8 rounded-lg transition border text-center max-w-sm" style={{ borderColor: `${brandColor}40`, backgroundColor: 'white' }}>
+              <h3 className="font-light text-lg mb-6" style={{ color: brandColor, letterSpacing: '-0.01em' }}>Follow Us</h3>
+              <div className="flex gap-8 justify-center">
+                <a href="https://instagram.com/LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+                    <circle cx="17.5" cy="6.5" r="1.5"></circle>
+                  </svg>
+                  <p className="text-xs mt-3" style={{ color: brandColor, fontWeight: 300 }}>Instagram</p>
+                </a>
+                <a href="https://tiktok.com/@LavereUK" target="_blank" rel="noopener noreferrer" className="transition hover:opacity-80">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={brandColor} strokeWidth="1.5">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                  </svg>
+                  <p className="text-xs mt-3" style={{ color: brandColor, fontWeight: 300 }}>TikTok</p>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t" style={{ backgroundColor: bgColor, borderColor: `${brandColor}20` }}>
+      <footer className="py-12 border-t" style={{ backgroundColor: accentColor, borderColor: `${brandColor}20`, color: darkText }}>
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="mb-3 text-sm tracking-widest">
             <span className="font-light" style={{ color: brandColor }}>LAVERE</span> — PROPERTY RENOVATION • MAINTENANCE • HOME IMPROVEMENTS
